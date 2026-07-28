@@ -31,9 +31,7 @@ export default function AdminLogin() {
     <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
       <div className="w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-lg">
         <div className="flex flex-col items-center text-center">
-          <span className="flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
-            <Snowflake className="size-6" />
-          </span>
+          <img src="/library/logo.png" alt="Sanyonara Admin" className="size-14 object-contain" />
           <h1 className="mt-4 text-2xl font-bold text-foreground">Sanyonara Admin</h1>
           <p className="mt-1 text-sm text-muted-foreground">Masuk untuk mengelola konten website</p>
         </div>

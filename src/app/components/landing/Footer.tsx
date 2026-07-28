@@ -12,9 +12,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-                <Snowflake className="size-5" />
-              </span>
+              <img src="/library/logo.png" alt="Sanyonara Service" className="size-9 object-contain" />
               <span className="text-lg font-bold text-foreground">
                 {settings.logoText}
                 <span className="text-primary"> Service</span>

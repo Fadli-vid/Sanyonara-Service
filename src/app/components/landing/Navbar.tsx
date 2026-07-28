@@ -38,9 +38,7 @@ export function Navbar() {
       >
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <a href="#beranda" className="flex items-center gap-2">
-            <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-              <Snowflake className="size-5" />
-            </span>
+            <img src="/library/logo.png" alt="Sanyonara Service" className="size-9 object-contain" />
             <span className="text-lg font-bold text-foreground">
               {data.settings.logoText}
               <span className="text-primary"> Service</span>
@@ -74,7 +72,7 @@ export function Navbar() {
               </SheetTrigger>
               <SheetContent side="right" className="w-72" aria-describedby={undefined}>
                 <SheetTitle className="mb-4 flex items-center gap-2">
-                  <Snowflake className="size-5 text-primary" /> {data.settings.logoText} Service
+                  <img src="/library/logo.png" alt="Sanyonara Service" className="size-6 object-contain" /> {data.settings.logoText} Service
                 </SheetTitle>
                 <div className="flex flex-col gap-1">
                   {NAV_ITEMS.map((item) => (

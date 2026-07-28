@@ -40,9 +40,7 @@ export default function AdminLayout() {
   const SidebarContent = () => (
     <div className="flex h-full flex-col">
       <div className="flex items-center gap-2 px-5 py-5">
-        <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-          <Snowflake className="size-5" />
-        </span>
+        <img src="/library/logo.png" alt="Sanyonara Admin" className="size-8 object-contain" />
         <span className="font-bold text-foreground">Sanyonara Admin</span>
       </div>
 
