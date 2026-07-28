@@ -20,9 +20,11 @@ export function SeoHead() {
     document.title = settings.metaTitle;
     upsertMeta("name", "description", settings.metaDescription);
     upsertMeta("name", "keywords", settings.keywords);
+    upsertMeta("name", "robots", "index, follow");
     upsertMeta("property", "og:title", settings.metaTitle);
     upsertMeta("property", "og:description", settings.metaDescription);
     upsertMeta("property", "og:image", settings.ogImage);
+    upsertMeta("property", "og:url", "https://sanyonaraservice.web.id/");
     upsertMeta("property", "og:type", "website");
 
     const rating = stats.find((s) => s.value.includes("/"))?.value.split("/")[0] ?? "4.9";
