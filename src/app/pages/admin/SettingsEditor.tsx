@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Save } from "lucide-react";
+import { Save, Download, RotateCcw, Rocket } from "lucide-react";
 import { PageHeader, FieldHint } from "../../components/admin/PageHeader";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
@@ -10,7 +10,7 @@ import { useSanyonara, type SettingsData } from "../../store/SanyonaraContext";
 import { toast } from "sonner";
 
 export default function SettingsEditor() {
-  const { data, update } = useSanyonara();
+  const { data, update, publishData, resetData } = useSanyonara();
   const [form, setForm] = useState<SettingsData>(data.settings);
   const set = (k: keyof SettingsData, v: string) => setForm((p) => ({ ...p, [k]: v }));
 
@@ -90,6 +90,51 @@ export default function SettingsEditor() {
               onChange={(e) => setForm((p) => ({ ...p, promo: { ...p.promo, text: e.target.value } }))}
             />
             <FieldHint>Tampil di bar tipis paling atas website.</FieldHint>
+          </div>
+        </div>
+
+        {/* Publikasi untuk Deploy */}
+        <div className="rounded-2xl border-2 border-primary/30 bg-primary/5 p-6">
+          <div className="flex items-start gap-3">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <Rocket className="size-5" />
+            </span>
+            <div className="flex-1">
+              <h2 className="font-bold text-foreground">Publikasikan untuk Deploy</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Download file <strong>siteData.json</strong> yang berisi semua konten & gambar yang sudah Anda edit.
+                File ini akan menjadi data yang dilihat <strong>semua pengunjung</strong> website.
+              </p>
+              <div className="mt-3">
+                <Button onClick={() => { publishData(); toast.success("File siteData.json berhasil didownload!"); }}>
+                  <Download className="size-4" /> Download siteData.json
+                </Button>
+              </div>
+              <div className="mt-4 rounded-xl bg-card p-4 text-sm text-muted-foreground">
+                <p className="font-medium text-foreground">Langkah setelah download:</p>
+                <ol className="mt-2 list-inside list-decimal space-y-1">
+                  <li>Pindahkan file <code className="rounded bg-muted px-1 text-xs">siteData.json</code> ke folder <code className="rounded bg-muted px-1 text-xs">public/data/</code> di proyek</li>
+                  <li>Jalankan <code className="rounded bg-muted px-1 text-xs">git add . && git commit -m "Update site data" && git push</code></li>
+                  <li>Website akan otomatis redeploy dengan konten terbaru</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Reset */}
+        <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="font-bold text-destructive">Reset Data</h2>
+              <p className="mt-1 text-sm text-muted-foreground">Kembalikan semua konten ke data bawaan (default).</p>
+            </div>
+            <Button
+              variant="destructive"
+              onClick={() => { resetData(); toast.success("Data berhasil direset ke default."); }}
+            >
+              <RotateCcw className="size-4" /> Reset
+            </Button>
           </div>
         </div>
       </div>
