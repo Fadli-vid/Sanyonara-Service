@@ -253,20 +253,20 @@ const seed: SanyonaraData = {
     { id: uid(), question: "Berapa lama proses service?", answer: "Sebagian besar perbaikan selesai di hari yang sama. Untuk kerusakan yang membutuhkan sparepart khusus, kami akan informasikan estimasi waktunya." },
   ],
   contact: {
-    whatsapp: "6281234567890",
-    email: "halo@sanyonaraservice.id",
-    phone: "021-12345678",
+    whatsapp: "6281808686042",
+    email: "halo@sanyonaraservice.web.id",
+    phone: "081808686042",
     instagram: "https://instagram.com/sanyonaraservice",
     facebook: "https://facebook.com/sanyonaraservice",
     tiktok: "https://tiktok.com/@sanyonaraservice",
     googleBusiness: "https://g.page/sanyonara-service",
   },
   location: {
-    address: "Jl. Raya Fatmawati No. 123, Cilandak, Jakarta Selatan, DKI Jakarta 12430",
+    address: "Jl. Tebet Barat Raya Gg. Keamanan II No.5, RT.014 rw01/RW.1, Tebet Bar., Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12810",
     hours: "Setiap hari, 08.00 - 21.00 WIB",
     mapsEmbed:
-      "https://www.google.com/maps?q=Fatmawati%20Jakarta%20Selatan&output=embed",
-    mapsLink: "https://maps.google.com/?q=Fatmawati+Jakarta+Selatan",
+      "https://www.google.com/maps?q=Tebet%20Barat%20Raya%20Jakarta%20Selatan&output=embed",
+    mapsLink: "https://maps.google.com/?q=Tebet+Barat+Raya+Jakarta+Selatan",
     walkInNote:
       "Anda juga dapat datang langsung ke workshop kami untuk konsultasi atau membawa perangkat yang perlu diperbaiki.",
   },
