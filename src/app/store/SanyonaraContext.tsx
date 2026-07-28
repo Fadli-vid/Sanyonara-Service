@@ -342,7 +342,9 @@ export function SanyonaraProvider({ children }: { children: React.ReactNode }) {
       hydrated,
       isLoggedIn,
       login: (email, password) => {
-        const ok = email.trim().toLowerCase() === "admin@sanyonara.id" && password === "admin123";
+        const adminEmail = (import.meta.env.VITE_ADMIN_EMAIL || "admin@sanyonara.id").trim().toLowerCase();
+        const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD || "admin123";
+        const ok = email.trim().toLowerCase() === adminEmail && password === adminPassword;
         if (ok) {
           setIsLoggedIn(true);
           localStorage.setItem(AUTH_KEY, "true");

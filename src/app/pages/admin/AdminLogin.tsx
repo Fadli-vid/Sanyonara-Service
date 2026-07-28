@@ -51,7 +51,7 @@ export default function AdminLogin() {
         </form>
 
         <div className="mt-6 rounded-xl bg-accent/60 p-3 text-center text-xs text-accent-foreground">
-          Demo login — Email: <strong>admin@sanyonara.id</strong> · Password: <strong>admin123</strong>
+          Demo login — Email: <strong>{import.meta.env.VITE_ADMIN_EMAIL || "admin@sanyonara.id"}</strong> · Password: <strong>{import.meta.env.VITE_ADMIN_PASSWORD || "admin123"}</strong>
         </div>
       </div>
     </div>
