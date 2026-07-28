@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { IMAGES, AVATARS } from "../lib/images";
 import { waLink } from "../lib/whatsapp";
+import { subscribeToCmsData, saveCmsDataToCloud } from "../lib/firebase";
 
 /* ======================= Tipe Data ======================= */
 
@@ -311,12 +312,12 @@ export function SanyonaraProvider({ children }: { children: React.ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // 1. Inisialisasi awal dari localStorage + Berlangganan Real-time Cloud Firebase
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        // Merge dangkal agar field baru dari seed tetap ada.
         setData({ ...seed, ...parsed });
       }
       setIsLoggedIn(localStorage.getItem(AUTH_KEY) === "true");
@@ -324,6 +325,20 @@ export function SanyonaraProvider({ children }: { children: React.ReactNode }) {
       /* abaikan, pakai seed */
     }
     setHydrated(true);
+
+    // Berlangganan perubahan data dari Cloud Firestore
+    const unsubscribe = subscribeToCmsData((cloudData) => {
+      if (cloudData) {
+        setData((prev) => ({ ...seed, ...prev, ...cloudData }));
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudData));
+        } catch {
+          /* abaikan */
+        }
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -355,8 +370,16 @@ export function SanyonaraProvider({ children }: { children: React.ReactNode }) {
         setIsLoggedIn(false);
         localStorage.removeItem(AUTH_KEY);
       },
-      update: (key, val) => setData((prev) => ({ ...prev, [key]: val })),
-      resetData: () => setData(seed),
+      update: (key, val) =>
+        setData((prev) => {
+          const next = { ...prev, [key]: val };
+          saveCmsDataToCloud(next).catch(() => {});
+          return next;
+        }),
+      resetData: () => {
+        setData(seed);
+        saveCmsDataToCloud(seed).catch(() => {});
+      },
       waHref: (message) => waLink(data.contact.whatsapp, message),
     }),
     [data, hydrated, isLoggedIn]
