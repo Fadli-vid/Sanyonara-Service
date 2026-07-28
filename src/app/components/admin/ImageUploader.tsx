@@ -1,10 +1,11 @@
 import { useState, useRef, useCallback, type DragEvent, type ChangeEvent } from "react";
-import { Upload, Link, X, ImageIcon, AlertCircle } from "lucide-react";
+import { Upload, Link, X, ImageIcon, AlertCircle, Cloud, Check } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import {
+  uploadToCloudinary,
   resizeAndCompress,
   validateFileSize,
   getStorageUsage,
@@ -15,7 +16,7 @@ import { toast } from "sonner";
 type Mode = "upload" | "url";
 
 interface ImageUploaderProps {
-  /** URL gambar saat ini (bisa data URL atau URL biasa). */
+  /** URL gambar saat ini (bisa Cloudinary URL, data URL, atau URL biasa). */
   value: string;
   /** Callback saat gambar berubah. */
   onChange: (url: string) => void;
@@ -60,18 +61,29 @@ export function ImageUploader({
 
       setLoading(true);
       try {
+        // 1. Coba upload langsung ke Cloudinary
+        try {
+          const cloudinaryUrl = await uploadToCloudinary(file);
+          onChange(cloudinaryUrl);
+          toast.success("Gambar berhasil di-upload ke Cloudinary (Cloud)!");
+          return;
+        } catch (cloudErr) {
+          console.warn("Cloudinary upload failed, falling back to local compression:", cloudErr);
+        }
+
+        // 2. Fallback jika Cloudinary belum di-preset/gagal: gunakan kompresi Base64 lokal
         const dataUrl = await resizeAndCompress(file);
 
         // Cek storage usage
         const usage = getStorageUsage();
         if (usage.percent > 90) {
           toast.warning(
-            `Penyimpanan hampir penuh (${usage.usedMB}MB / 5MB). Pertimbangkan untuk menghapus beberapa gambar.`
+            `Penyimpanan lokal hampir penuh (${usage.usedMB}MB / 5MB).`
           );
         }
 
         onChange(dataUrl);
-        toast.success("Gambar berhasil diupload!");
+        toast.success("Gambar disimpan secara lokal.");
       } catch (err) {
         toast.error(err instanceof Error ? err.message : "Gagal memproses gambar.");
       } finally {
@@ -105,6 +117,8 @@ export function ImageUploader({
     onChange("");
     if (inputRef.current) inputRef.current.value = "";
   };
+
+  const isCloudinaryUrl = value.includes("cloudinary.com");
 
   return (
     <div className="grid gap-2">
@@ -162,7 +176,7 @@ export function ImageUploader({
           {loading ? (
             <>
               <div className="size-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-              <p className="mt-2 text-xs text-muted-foreground">Memproses gambar...</p>
+              <p className="mt-2 text-xs text-muted-foreground">Mengunggah gambar ke Cloud...</p>
             </>
           ) : (
             <>
@@ -173,7 +187,7 @@ export function ImageUploader({
                 {dragging ? "Lepaskan gambar di sini" : "Klik atau seret gambar ke sini"}
               </p>
               <p className="mt-0.5 text-xs text-muted-foreground">
-                JPG, PNG, WebP — Maks 2MB
+                JPG, PNG, WebP — Maks 5MB (Tersimpan di Cloud)
               </p>
             </>
           )}
@@ -213,22 +227,26 @@ export function ImageUploader({
           >
             <X className="size-3.5" />
           </Button>
-          {isDataUrl(value) && (
-            <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-black/60 px-2 py-0.5 text-[10px] font-medium text-white">
-              <Upload className="size-2.5" /> Uploaded
+          {isCloudinaryUrl ? (
+            <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-emerald-600/90 px-2 py-0.5 text-[10px] font-medium text-white shadow-sm">
+              <Cloud className="size-3" /> Cloudinary Hosted
             </span>
-          )}
+          ) : isDataUrl(value) ? (
+            <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-black/60 px-2 py-0.5 text-[10px] font-medium text-white">
+              <Upload className="size-2.5" /> Local Base64
+            </span>
+          ) : null}
         </div>
       )}
 
-      {/* Storage warning */}
+      {/* Storage warning for local base64 */}
       {isDataUrl(value) && (() => {
         const usage = getStorageUsage();
         if (usage.percent > 70) {
           return (
             <div className="flex items-center gap-1.5 rounded-lg bg-amber-50 px-3 py-1.5 text-xs text-amber-700">
               <AlertCircle className="size-3.5 shrink-0" />
-              Penyimpanan: {usage.usedMB}MB / 5MB ({usage.percent}%)
+              Penyimpanan lokal: {usage.usedMB}MB / 5MB ({usage.percent}%)
             </div>
           );
         }

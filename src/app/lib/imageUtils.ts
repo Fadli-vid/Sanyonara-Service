@@ -1,8 +1,41 @@
 /**
  * Utilitas pemrosesan gambar untuk fitur upload di admin panel.
- * Gambar di-resize dan dikompresi menjadi Base64 Data URL
- * agar bisa disimpan di localStorage tanpa membutuhkan backend.
+ * Mampu melakukan upload langsung ke Cloudinary untuk menghasilkan URL publik permanen,
+ * atau fallback ke Base64 Data URL jika Cloudinary belum diatur.
  */
+
+// Konfigurasi Cloudinary dari variabel lingkungan .env
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "dhx7maf56";
+const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || "sanyonara_preset";
+
+/**
+ * Unggah file gambar ke Cloudinary.
+ * @param file File gambar yang di-upload
+ * @returns Promise<string> URL publik Cloudinary (https://res.cloudinary.com/...)
+ */
+export async function uploadToCloudinary(file: File): Promise<string> {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", UPLOAD_PRESET);
+  formData.append("folder", "sanyonara_service");
+
+  const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+
+  const response = await fetch(url, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(
+      errorData.error?.message || `Gagal mengunggah ke Cloudinary (${response.statusText})`
+    );
+  }
+
+  const data = await response.json();
+  return data.secure_url;
+}
 
 /**
  * Resize dan kompresi file gambar menjadi Base64 Data URL (JPEG).
@@ -99,14 +132,14 @@ export function isDataUrl(str: string): boolean {
   return str.startsWith("data:");
 }
 
-/** Ukuran file max yang diperbolehkan (2MB sebelum kompresi). */
-export const MAX_FILE_SIZE = 2 * 1024 * 1024;
+/** Ukuran file max yang diperbolehkan (5MB). */
+export const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 /** Validasi ukuran file. */
 export function validateFileSize(file: File): string | null {
   if (file.size > MAX_FILE_SIZE) {
     const sizeMB = (file.size / (1024 * 1024)).toFixed(1);
-    return `Ukuran file (${sizeMB}MB) melebihi batas 2MB. Pilih gambar yang lebih kecil.`;
+    return `Ukuran file (${sizeMB}MB) melebihi batas 5MB. Pilih gambar yang lebih kecil.`;
   }
   return null;
 }

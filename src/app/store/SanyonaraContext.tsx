@@ -292,7 +292,6 @@ const seed: SanyonaraData = {
 
 const STORAGE_KEY = "sanyonara_data_v1";
 const AUTH_KEY = "sanyonara_auth_v1";
-const PUBLISHED_DATA_URL = "/data/siteData.json";
 
 interface ContextValue {
   data: SanyonaraData;
@@ -303,8 +302,6 @@ interface ContextValue {
   update: <K extends keyof SanyonaraData>(key: K, value: SanyonaraData[K]) => void;
   resetData: () => void;
   waHref: (message?: string) => string;
-  /** Download siteData.json berisi semua data saat ini. */
-  publishData: () => void;
 }
 
 const SanyonaraContext = createContext<ContextValue | null>(null);
@@ -315,43 +312,18 @@ export function SanyonaraProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    /**
-     * Urutan prioritas data:
-     * 1. localStorage (perubahan admin lokal, tertinggi)
-     * 2. /data/siteData.json (data yang dipublikasikan, untuk semua pengunjung)
-     * 3. seed (data bawaan kode)
-     */
-    const hydrate = async () => {
-      let base = seed;
-
-      // Coba muat data yang sudah dipublikasikan
-      try {
-        const res = await fetch(PUBLISHED_DATA_URL);
-        if (res.ok) {
-          const published = await res.json();
-          base = { ...seed, ...published };
-        }
-      } catch {
-        /* Belum ada siteData.json, pakai seed */
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        // Merge dangkal agar field baru dari seed tetap ada.
+        setData({ ...seed, ...parsed });
       }
-
-      // Overlay perubahan lokal dari localStorage (hanya untuk admin)
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (raw) {
-          const localData = JSON.parse(raw);
-          base = { ...base, ...localData };
-        }
-        setIsLoggedIn(localStorage.getItem(AUTH_KEY) === "true");
-      } catch {
-        /* abaikan, pakai base */
-      }
-
-      setData(base);
-      setHydrated(true);
-    };
-
-    hydrate();
+      setIsLoggedIn(localStorage.getItem(AUTH_KEY) === "true");
+    } catch {
+      /* abaikan, pakai seed */
+    }
+    setHydrated(true);
   }, []);
 
   useEffect(() => {
@@ -363,19 +335,6 @@ export function SanyonaraProvider({ children }: { children: React.ReactNode }) {
       }
     }
   }, [data, hydrated]);
-
-  const publishData = () => {
-    const json = JSON.stringify(data, null, 2);
-    const blob = new Blob([json], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "siteData.json";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
 
   const value = useMemo<ContextValue>(
     () => ({
@@ -397,7 +356,6 @@ export function SanyonaraProvider({ children }: { children: React.ReactNode }) {
       update: (key, val) => setData((prev) => ({ ...prev, [key]: val })),
       resetData: () => setData(seed),
       waHref: (message) => waLink(data.contact.whatsapp, message),
-      publishData,
     }),
     [data, hydrated, isLoggedIn]
   );
@@ -412,4 +370,3 @@ export function useSanyonara() {
 }
 
 export { uid };
-
