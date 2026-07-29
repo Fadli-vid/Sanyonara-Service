@@ -5,8 +5,8 @@
  */
 
 // Konfigurasi Cloudinary dari variabel lingkungan .env
-const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "dhx7maf56";
-const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || "sanyonara_preset";
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "";
+const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || "";
 
 /**
  * Unggah file gambar ke Cloudinary.

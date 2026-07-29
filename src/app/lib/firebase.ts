@@ -1,15 +1,15 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, onSnapshot, setDoc } from "firebase/firestore";
 
-// Konfigurasi Firebase dari akun Anda
+// Konfigurasi Firebase dibaca murni dari variabel lingkungan (.env) demi keamanan
 const firebaseConfig = {
-  apiKey: "AIzaSyD24pKrwc4sneQJHcNv9hxOOC3K8UA7Uk0",
-  authDomain: "sanyonara-service.firebaseapp.com",
-  projectId: "sanyonara-service",
-  storageBucket: "sanyonara-service.firebasestorage.app",
-  messagingSenderId: "441156305659",
-  appId: "1:441156305659:web:a674ccdfaa176d4156665e",
-  measurementId: "G-JYX02GVE6P"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || ""
 };
 
 // Inisialisasi Firebase App & Firestore Database
@@ -24,6 +24,11 @@ const DOC_REF = doc(db, "cms", "sanyonara_data");
  * Callback akan dipanggil otomatis setiap kali ada perubahan data dari Admin di perangkat mana pun.
  */
 export function subscribeToCmsData(onDataUpdate: (data: any) => void) {
+  if (!firebaseConfig.apiKey) {
+    console.warn("Firebase API key tidak ditemukan. Menggunakan penyimpanan lokal.");
+    return () => {};
+  }
+
   return onSnapshot(
     DOC_REF,
     (snapshot) => {
@@ -42,6 +47,10 @@ export function subscribeToCmsData(onDataUpdate: (data: any) => void) {
  * Mengupdate data secara global sehingga semua pengunjung di perangkat lain langsung menerima data terbaru.
  */
 export async function saveCmsDataToCloud(data: any) {
+  if (!firebaseConfig.apiKey) {
+    return;
+  }
+
   try {
     await setDoc(DOC_REF, data);
   } catch (error) {
