@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate, Navigate } from "react-router";
 import {
-  LayoutDashboard, Image as ImageIcon, BarChart3, Info, Wrench, Tag, MapPin,
+  LayoutDashboard, Image as ImageIcon, BarChart3, Info, ShieldCheck, Wrench, Tag, MapPin,
   Images, Footprints, MessageSquareQuote, HelpCircle, Phone, Navigation, Settings,
   LogOut, Snowflake, Menu, ExternalLink,
 } from "lucide-react";
@@ -13,6 +13,7 @@ const MENU = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/admin/hero", label: "Hero", icon: ImageIcon },
   { to: "/admin/statistik", label: "Statistik Utama", icon: BarChart3 },
+  { to: "/admin/keunggulan", label: "Keunggulan Kami", icon: ShieldCheck },
   { to: "/admin/tentang", label: "Tentang Kami", icon: Info },
   { to: "/admin/layanan", label: "Layanan", icon: Wrench },
   { to: "/admin/harga", label: "Harga", icon: Tag },

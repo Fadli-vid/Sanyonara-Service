@@ -7,10 +7,20 @@ export function DynamicIcon({ name, ...props }: { name: string } & LucideProps) 
   return <Cmp {...props} />;
 }
 
-/** Daftar nama ikon yang umum dipakai untuk dropdown admin. */
+/** Daftar nama ikon lengkap yang populer & siap dipilih di admin panel. */
 export const ICON_OPTIONS = [
-  "Wind", "Gauge", "Wrench", "PlugZap", "Snowflake", "Refrigerator",
-  "WashingMachine", "Tv", "CupSoda", "Fan", "ShieldCheck", "BadgeCheck",
-  "Clock", "PackageCheck", "ReceiptText", "Home", "Zap", "Settings",
-  "ThermometerSnowflake", "Droplets",
+  // Garansi & Kualitas
+  "ShieldCheck", "BadgeCheck", "Award", "CheckCircle2", "Verified", "ShieldAlert",
+  // Layanan & Waktu
+  "Clock", "Zap", "Timer", "CalendarCheck", "Hourglass", "Flame", "Sparkles",
+  // Rumah & Lokasi
+  "Home", "MapPin", "Truck", "Building", "Store", "UserCheck",
+  // Alat & Teknisi
+  "Wrench", "Hammer", "Settings", "Cog", "Tool", "PlugZap", "Gauge",
+  // Harga & Transparansi
+  "ReceiptText", "Tag", "Coins", "CreditCard", "Wallet", "DollarSign", "Percent",
+  // Kepuasan & Rating
+  "Star", "Heart", "ThumbsUp", "Smile", "PackageCheck", "Headphones",
+  // Perangkat & Elektronik
+  "Snowflake", "Wind", "Refrigerator", "WashingMachine", "Tv", "CupSoda", "Fan", "Cpu", "Droplets", "ThermometerSnowflake"
 ];
