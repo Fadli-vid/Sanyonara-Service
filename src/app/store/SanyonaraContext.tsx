@@ -283,7 +283,7 @@ const seed: SanyonaraData = {
     metaDescription:
       "Jasa service AC Jakarta Selatan terpercaya. Melayani cuci AC, isi freon, instalasi AC, service kulkas, mesin cuci, televisi, & dispenser. Teknisi berpengalaman, bergaransi, home service se-Jakarta.",
     keywords:
-      "service AC Jakarta Selatan, service AC Jakarta, cuci AC Jakarta, isi freon, service kulkas, service mesin cuci, teknisi AC panggilan",
+      "service AC Tebet, service AC Jakarta Selatan, jasa cuci AC Tebet, service elektronik Tebet, service kulkas Jakarta Selatan, service mesin cuci Tebet, isi freon AC Tebet, bongkar pasang AC Jakarta Selatan, service TV Jakarta Selatan, teknisi AC panggilan Tebet, service AC terdekat Jakarta Selatan",
     ogImage: IMAGES.heroTechnician,
     copyright: "© 2026 Sanyonara Service. Seluruh hak cipta dilindungi.",
     promo: {
