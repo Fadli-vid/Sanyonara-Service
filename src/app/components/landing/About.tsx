@@ -11,47 +11,47 @@ export function About() {
   return (
     <Section id="tentang" className="bg-card">
       <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2">
           <SectionReveal>
             <div className="relative">
-              <div className="overflow-hidden rounded-3xl border border-border shadow-lg">
+              <div className="overflow-hidden rounded-2xl border border-border shadow-lg sm:rounded-3xl">
                 <ImageWithFallback
                   src={about.image}
                   alt="Teknisi Sanyonara Service dengan peralatan lengkap"
-                  className="aspect-[4/3] w-full object-cover"
+                  className="aspect-[3/2] w-full object-cover sm:aspect-[4/3]"
                 />
               </div>
             </div>
           </SectionReveal>
 
           <SectionReveal delay={0.1}>
-            <span className="inline-block rounded-full bg-accent px-3 py-1 text-sm font-medium text-accent-foreground">
+            <span className="inline-block rounded-full bg-accent px-3 py-1 text-xs font-medium text-accent-foreground sm:text-sm">
               Tentang Kami
             </span>
-            <h2 className="mt-4 text-3xl font-bold text-foreground sm:text-4xl">{about.title}</h2>
-            <p className="mt-4 text-muted-foreground">{about.body}</p>
+            <h2 className="mt-3 text-2xl font-bold text-foreground sm:mt-4 sm:text-4xl">{about.title}</h2>
+            <p className="mt-3 text-sm text-muted-foreground sm:mt-4 sm:text-base">{about.body}</p>
 
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-border bg-background p-5">
-                <span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Eye className="size-5" />
+            <div className="mt-4 grid gap-3 sm:mt-6 sm:grid-cols-2 sm:gap-4">
+              <div className="rounded-xl border border-border bg-background p-4 sm:rounded-2xl sm:p-5">
+                <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary sm:size-10 sm:rounded-xl">
+                  <Eye className="size-4 sm:size-5" />
                 </span>
-                <h3 className="mt-3 font-bold text-foreground">Visi</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{about.visi}</p>
+                <h3 className="mt-2 text-sm font-bold text-foreground sm:mt-3 sm:text-base">Visi</h3>
+                <p className="mt-0.5 text-xs text-muted-foreground sm:mt-1 sm:text-sm">{about.visi}</p>
               </div>
-              <div className="rounded-2xl border border-border bg-background p-5">
-                <span className="flex size-10 items-center justify-center rounded-xl bg-brand-emerald/10 text-brand-emerald">
-                  <Target className="size-5" />
+              <div className="rounded-xl border border-border bg-background p-4 sm:rounded-2xl sm:p-5">
+                <span className="flex size-9 items-center justify-center rounded-lg bg-brand-emerald/10 text-brand-emerald sm:size-10 sm:rounded-xl">
+                  <Target className="size-4 sm:size-5" />
                 </span>
-                <h3 className="mt-3 font-bold text-foreground">Misi</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{about.misi}</p>
+                <h3 className="mt-2 text-sm font-bold text-foreground sm:mt-3 sm:text-base">Misi</h3>
+                <p className="mt-0.5 text-xs text-muted-foreground sm:mt-1 sm:text-sm">{about.misi}</p>
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="mt-4 grid grid-cols-2 gap-2 sm:mt-6 sm:gap-3">
               {about.points.map((p) => (
-                <span key={p} className="inline-flex items-center gap-2 text-sm font-medium text-foreground">
-                  <CheckCircle2 className="size-4 shrink-0 text-brand-emerald" /> {p}
+                <span key={p} className="inline-flex items-center gap-1 text-xs font-medium text-foreground sm:gap-2 sm:text-sm">
+                  <CheckCircle2 className="size-3.5 shrink-0 text-brand-emerald sm:size-4" /> {p}
                 </span>
               ))}
             </div>

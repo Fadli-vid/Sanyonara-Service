@@ -8,30 +8,30 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-card">
-      <Container className="py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <Container className="py-8 sm:py-14">
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2">
-              <img src="/library/logo.png" alt="Sanyonara Service" className="size-9 object-contain" />
-              <span className="text-lg font-bold text-foreground">
+              <img src="/library/logo.png" alt="Sanyonara Service" className="size-8 object-contain sm:size-9" />
+              <span className="text-base font-bold text-foreground sm:text-lg">
                 {settings.logoText}
                 <span className="text-primary"> Service</span>
               </span>
             </div>
-            <p className="mt-4 text-sm text-muted-foreground">{settings.tagline}. Melayani DKI Jakarta, fokus Jakarta Selatan dan sekitarnya.</p>
-            <div className="mt-4 flex gap-3">
+            <p className="mt-3 text-xs text-muted-foreground sm:mt-4 sm:text-sm">{settings.tagline}. Melayani DKI Jakarta, fokus Jakarta Selatan dan sekitarnya.</p>
+            <div className="mt-3 flex gap-2 sm:mt-4 sm:gap-3">
               {contact.instagram && (
-                <a href={contact.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-primary">
+                <a href={contact.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex size-8 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-primary sm:size-9">
                   <Instagram className="size-4" />
                 </a>
               )}
               {contact.facebook && (
-                <a href={contact.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-primary">
+                <a href={contact.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="flex size-8 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-primary sm:size-9">
                   <Facebook className="size-4" />
                 </a>
               )}
               {contact.googleBusiness && (
-                <a href={contact.googleBusiness} target="_blank" rel="noopener noreferrer" aria-label="Google Business Profile" className="flex size-9 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-primary">
+                <a href={contact.googleBusiness} target="_blank" rel="noopener noreferrer" aria-label="Google Business Profile" className="flex size-8 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-primary sm:size-9">
                   <ExternalLink className="size-4" />
                 </a>
               )}
@@ -39,8 +39,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-bold text-foreground">Navigasi</h3>
-            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+            <h3 className="text-sm font-bold text-foreground sm:text-base">Navigasi</h3>
+            <ul className="mt-3 space-y-1.5 text-xs text-muted-foreground sm:mt-4 sm:space-y-2 sm:text-sm">
               <li><a href="#layanan" className="hover:text-primary">Layanan</a></li>
               <li><a href="#harga" className="hover:text-primary">Harga</a></li>
               <li><a href="#area" className="hover:text-primary">Area Layanan</a></li>
@@ -50,16 +50,17 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-bold text-foreground">Kontak</h3>
-            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-              <li className="flex items-start gap-2"><MapPin className="mt-0.5 size-4 shrink-0 text-primary" /> {location.address}</li>
-              <li className="flex items-center gap-2"><Phone className="size-4 shrink-0 text-primary" /> {contact.phone}</li>
-              <li className="flex items-center gap-2"><Mail className="size-4 shrink-0 text-primary" /> {contact.email}</li>
-              <li className="flex items-start gap-2"><Clock className="mt-0.5 size-4 shrink-0 text-primary" /> {location.hours}</li>
+            <h3 className="text-sm font-bold text-foreground sm:text-base">Kontak</h3>
+            <ul className="mt-3 space-y-2 text-xs text-muted-foreground sm:mt-4 sm:space-y-3 sm:text-sm">
+              <li className="flex items-start gap-2"><MapPin className="mt-0.5 size-3.5 shrink-0 text-primary sm:size-4" /> {location.address}</li>
+              <li className="flex items-center gap-2"><Phone className="size-3.5 shrink-0 text-primary sm:size-4" /> {contact.phone}</li>
+              <li className="flex items-center gap-2"><Mail className="size-3.5 shrink-0 text-primary sm:size-4" /> {contact.email}</li>
+              <li className="flex items-start gap-2"><Clock className="mt-0.5 size-3.5 shrink-0 text-primary sm:size-4" /> {location.hours}</li>
             </ul>
           </div>
 
-          <div>
+          {/* Map hidden on mobile, shown on desktop */}
+          <div className="hidden sm:block">
             <h3 className="font-bold text-foreground">Lokasi</h3>
             <div className="mt-4 overflow-hidden rounded-xl border border-border">
               <iframe
@@ -75,9 +76,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row">
-          <p className="text-sm text-muted-foreground">{settings.copyright}</p>
-          <a href="/admin/login" className="text-sm text-muted-foreground hover:text-primary">Masuk Admin</a>
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-border pt-5 sm:mt-12 sm:flex-row sm:gap-4 sm:pt-6">
+          <p className="text-xs text-muted-foreground sm:text-sm">{settings.copyright}</p>
+          <a href="/admin/login" className="text-xs text-muted-foreground hover:text-primary sm:text-sm">Masuk Admin</a>
         </div>
       </Container>
     </footer>

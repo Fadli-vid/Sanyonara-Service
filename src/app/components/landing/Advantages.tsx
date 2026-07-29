@@ -14,16 +14,16 @@ export function Advantages() {
           description="Kami berkomitmen memberikan pelayanan terbaik yang membuat pelanggan tenang dan puas."
         />
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {data.advantages.map((a, i) => (
             <SectionReveal key={a.id} delay={(i % 3) * 0.05}>
-              <div className="flex h-full items-start gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:shadow-md">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-brand-emerald/10 text-brand-emerald">
-                  <DynamicIcon name={a.icon} className="size-6" />
+              <div className="flex h-full flex-col items-center gap-2 rounded-xl border border-border bg-card p-4 text-center shadow-sm transition-all hover:shadow-md sm:flex-row sm:items-start sm:gap-4 sm:rounded-2xl sm:p-6 sm:text-left">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-emerald/10 text-brand-emerald sm:size-12 sm:rounded-xl">
+                  <DynamicIcon name={a.icon} className="size-5 sm:size-6" />
                 </span>
                 <div>
-                  <h3 className="text-lg font-bold text-foreground">{a.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{a.description}</p>
+                  <h3 className="text-sm font-bold text-foreground sm:text-lg">{a.title}</h3>
+                  <p className="mt-0.5 text-xs text-muted-foreground sm:mt-1 sm:text-sm">{a.description}</p>
                 </div>
               </div>
             </SectionReveal>

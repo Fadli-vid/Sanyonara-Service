@@ -18,19 +18,19 @@ export function Services() {
           description="Dari cuci AC hingga perbaikan kulkas dan mesin cuci, semua ditangani teknisi berpengalaman dengan hasil bergaransi."
         />
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {services.map((s, i) => (
             <SectionReveal key={s.id} delay={(i % 3) * 0.05}>
-              <div className="group flex h-full flex-col rounded-2xl border border-border bg-background p-6 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg">
-                <span className="flex size-12 items-center justify-center rounded-xl bg-accent text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <DynamicIcon name={s.icon} className="size-6" />
+              <div className="group flex h-full flex-col rounded-xl border border-border bg-background p-4 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg sm:rounded-2xl sm:p-6">
+                <span className="flex size-10 items-center justify-center rounded-lg bg-accent text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground sm:size-12 sm:rounded-xl">
+                  <DynamicIcon name={s.icon} className="size-5 sm:size-6" />
                 </span>
-                <h3 className="mt-4 text-lg font-bold text-foreground">{s.name}</h3>
-                <p className="mt-2 flex-1 text-sm text-muted-foreground">{s.description}</p>
+                <h3 className="mt-3 text-sm font-bold text-foreground sm:mt-4 sm:text-lg">{s.name}</h3>
+                <p className="mt-1 flex-1 text-xs text-muted-foreground sm:mt-2 sm:text-sm">{s.description}</p>
                 <Button
                   asChild
                   variant="ghost"
-                  className="mt-4 justify-start px-0 text-primary hover:bg-transparent hover:text-brand-blue-dark"
+                  className="mt-3 hidden justify-start px-0 text-primary hover:bg-transparent hover:text-brand-blue-dark sm:mt-4 sm:flex"
                 >
                   <a
                     href={waHref(`Halo Sanyonara Service, saya ingin menanyakan layanan ${s.name}.`)}
