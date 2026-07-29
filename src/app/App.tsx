@@ -16,6 +16,7 @@ const ServicesManager = lazy(() => import("./pages/admin/ServicesManager"));
 const PricingManager = lazy(() => import("./pages/admin/PricingManager"));
 const ServiceAreaEditor = lazy(() => import("./pages/admin/ServiceAreaEditor"));
 const GalleryManager = lazy(() => import("./pages/admin/GalleryManager"));
+const ProcessManager = lazy(() => import("./pages/admin/ProcessManager"));
 const TestimonialsManager = lazy(() => import("./pages/admin/TestimonialsManager"));
 const FaqManager = lazy(() => import("./pages/admin/FaqManager"));
 const ContactEditor = lazy(() => import("./pages/admin/ContactEditor"));
@@ -49,6 +50,7 @@ export default function App() {
               <Route path="harga" element={<PricingManager />} />
               <Route path="area" element={<ServiceAreaEditor />} />
               <Route path="galeri" element={<GalleryManager />} />
+              <Route path="alur" element={<ProcessManager />} />
               <Route path="testimoni" element={<TestimonialsManager />} />
               <Route path="faq" element={<FaqManager />} />
               <Route path="kontak" element={<ContactEditor />} />

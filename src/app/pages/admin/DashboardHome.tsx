@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { Wrench, Images, MessageSquareQuote, HelpCircle, ImageIcon, BarChart3, Tag, Plus } from "lucide-react";
+import { Wrench, Images, MessageSquareQuote, HelpCircle, ImageIcon, BarChart3, Footprints, Tag, Plus } from "lucide-react";
 import { PageHeader } from "../../components/admin/PageHeader";
 import { Button } from "../../components/ui/button";
 import { useSanyonara } from "../../store/SanyonaraContext";
@@ -18,6 +18,7 @@ export default function DashboardHome() {
   const actions = [
     { label: "Edit Hero", icon: ImageIcon, to: "/admin/hero" },
     { label: "Edit Statistik", icon: BarChart3, to: "/admin/statistik" },
+    { label: "Edit Alur", icon: Footprints, to: "/admin/alur" },
     { label: "Tambah Galeri", icon: Images, to: "/admin/galeri" },
     { label: "Tambah Harga", icon: Tag, to: "/admin/harga" },
   ];

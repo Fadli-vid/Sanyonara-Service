@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, Outlet, useNavigate, Navigate } from "react-router";
 import {
   LayoutDashboard, Image as ImageIcon, BarChart3, Info, Wrench, Tag, MapPin,
-  Images, MessageSquareQuote, HelpCircle, Phone, Navigation, Settings,
+  Images, Footprints, MessageSquareQuote, HelpCircle, Phone, Navigation, Settings,
   LogOut, Snowflake, Menu, ExternalLink,
 } from "lucide-react";
 import { Button } from "../../components/ui/button";
@@ -18,6 +18,7 @@ const MENU = [
   { to: "/admin/harga", label: "Harga", icon: Tag },
   { to: "/admin/area", label: "Area Layanan", icon: MapPin },
   { to: "/admin/galeri", label: "Galeri", icon: Images },
+  { to: "/admin/alur", label: "Alur Pelayanan", icon: Footprints },
   { to: "/admin/testimoni", label: "Testimoni", icon: MessageSquareQuote },
   { to: "/admin/faq", label: "FAQ", icon: HelpCircle },
   { to: "/admin/kontak", label: "Kontak", icon: Phone },
