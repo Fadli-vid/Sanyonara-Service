@@ -10,6 +10,7 @@ const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const DashboardHome = lazy(() => import("./pages/admin/DashboardHome"));
 const HeroEditor = lazy(() => import("./pages/admin/HeroEditor"));
+const StatsEditor = lazy(() => import("./pages/admin/StatsEditor"));
 const AboutEditor = lazy(() => import("./pages/admin/AboutEditor"));
 const ServicesManager = lazy(() => import("./pages/admin/ServicesManager"));
 const PricingManager = lazy(() => import("./pages/admin/PricingManager"));
@@ -42,6 +43,7 @@ export default function App() {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<DashboardHome />} />
               <Route path="hero" element={<HeroEditor />} />
+              <Route path="statistik" element={<StatsEditor />} />
               <Route path="tentang" element={<AboutEditor />} />
               <Route path="layanan" element={<ServicesManager />} />
               <Route path="harga" element={<PricingManager />} />
