@@ -17,31 +17,33 @@ export function Pricing() {
           description="Estimasi harga di bawah dapat menyesuaikan kondisi kerusakan dan lokasi. Hubungi kami untuk penawaran pasti."
         />
 
-        {/* Mobile: horizontal scroll carousel */}
-        <div className="mt-8 sm:hidden">
-          <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-4 snap-x snap-mandatory scrollbar-none">
+        {/* Mobile: horizontal scroll carousel dengan pt-4 agar badge tidak terpotong */}
+        <div className="mt-6 sm:hidden">
+          <div className="-mx-4 flex items-stretch gap-3 overflow-x-auto px-4 pt-5 pb-4 snap-x snap-mandatory scrollbar-none">
             {items.map((p) => (
               <div
                 key={p.id}
-                className={`relative flex min-w-[240px] shrink-0 snap-center flex-col rounded-xl border p-5 ${
+                className={`relative flex min-w-[250px] max-w-[270px] shrink-0 snap-center flex-col justify-between rounded-xl border p-5 transition-all ${
                   p.popular ? "border-primary bg-background shadow-md" : "border-border bg-background"
                 }`}
               >
                 {p.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-orange px-3 py-1 text-xs font-bold text-white">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-orange px-3 py-1 text-xs font-bold text-white shadow-sm whitespace-nowrap z-10">
                     Paling Populer
                   </span>
                 )}
-                <h3 className="text-base font-bold text-foreground">{p.name}</h3>
-                <p className="mt-2 text-xs text-muted-foreground">Mulai dari</p>
-                <p className="text-2xl font-extrabold text-primary">{p.price}</p>
-                <p className="mt-2 flex items-start gap-1.5 text-xs text-muted-foreground">
-                  <Check className="mt-0.5 size-3.5 shrink-0 text-brand-emerald" /> {p.description}
-                </p>
+                <div>
+                  <h3 className="text-base font-bold text-foreground">{p.name}</h3>
+                  <p className="mt-2 text-xs text-muted-foreground">Mulai dari</p>
+                  <p className="text-2xl font-extrabold text-primary">{p.price}</p>
+                  <p className="mt-2 flex items-start gap-1.5 text-xs text-muted-foreground">
+                    <Check className="mt-0.5 size-3.5 shrink-0 text-brand-emerald" /> {p.description}
+                  </p>
+                </div>
                 <Button
                   asChild
                   size="sm"
-                  className={`mt-4 ${p.popular ? "bg-brand-orange text-white hover:bg-brand-orange-dark" : ""}`}
+                  className={`mt-4 w-full ${p.popular ? "bg-brand-orange text-white hover:bg-brand-orange-dark" : ""}`}
                   variant={p.popular ? "default" : "outline"}
                 >
                   <a
@@ -57,29 +59,31 @@ export function Pricing() {
           </div>
         </div>
 
-        {/* Desktop: grid layout */}
-        <div className="mt-12 hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-4">
+        {/* Desktop: grid layout dengan pt-4 agar badge tidak terpotong */}
+        <div className="mt-12 hidden pt-3 gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-4">
           {items.map((p, i) => (
-            <SectionReveal key={p.id} delay={(i % 4) * 0.05}>
+            <SectionReveal key={p.id} delay={(i % 4) * 0.05} className="h-full">
               <div
-                className={`relative flex h-full flex-col rounded-2xl border p-6 transition-all hover:-translate-y-1 hover:shadow-lg ${
+                className={`relative flex h-full flex-col justify-between rounded-2xl border p-6 transition-all hover:-translate-y-1 hover:shadow-lg ${
                   p.popular ? "border-primary bg-background shadow-md" : "border-border bg-background"
                 }`}
               >
                 {p.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-orange px-3 py-1 text-xs font-bold text-white">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-orange px-3 py-1 text-xs font-bold text-white shadow-sm whitespace-nowrap z-10">
                     Paling Populer
                   </span>
                 )}
-                <h3 className="text-lg font-bold text-foreground">{p.name}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">Mulai dari</p>
-                <p className="text-3xl font-extrabold text-primary">{p.price}</p>
-                <p className="mt-3 flex items-start gap-2 text-sm text-muted-foreground">
-                  <Check className="mt-0.5 size-4 shrink-0 text-brand-emerald" /> {p.description}
-                </p>
+                <div>
+                  <h3 className="text-lg font-bold text-foreground">{p.name}</h3>
+                  <p className="mt-3 text-sm text-muted-foreground">Mulai dari</p>
+                  <p className="text-3xl font-extrabold text-primary">{p.price}</p>
+                  <p className="mt-3 flex items-start gap-2 text-sm text-muted-foreground">
+                    <Check className="mt-0.5 size-4 shrink-0 text-brand-emerald" /> {p.description}
+                  </p>
+                </div>
                 <Button
                   asChild
-                  className={`mt-6 ${p.popular ? "bg-brand-orange text-white hover:bg-brand-orange-dark" : ""}`}
+                  className={`mt-6 w-full ${p.popular ? "bg-brand-orange text-white hover:bg-brand-orange-dark" : ""}`}
                   variant={p.popular ? "default" : "outline"}
                 >
                   <a

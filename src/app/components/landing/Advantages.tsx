@@ -16,7 +16,7 @@ export function Advantages() {
 
         <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {data.advantages.map((a, i) => (
-            <SectionReveal key={a.id} delay={(i % 3) * 0.05}>
+            <SectionReveal key={a.id} delay={(i % 3) * 0.05} className="h-full">
               <div className="flex h-full flex-col items-center gap-2 rounded-xl border border-border bg-card p-4 text-center shadow-sm transition-all hover:shadow-md sm:flex-row sm:items-start sm:gap-4 sm:rounded-2xl sm:p-6 sm:text-left">
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-emerald/10 text-brand-emerald sm:size-12 sm:rounded-xl">
                   <DynamicIcon name={a.icon} className="size-5 sm:size-6" />

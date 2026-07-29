@@ -17,22 +17,24 @@ export function Testimonials() {
           description="Kepuasan pelanggan di Jakarta Selatan dan sekitarnya adalah prioritas utama kami."
         />
 
-        {/* Mobile: horizontal scroll carousel */}
+        {/* Mobile: horizontal scroll carousel dengan tinggi konsisten */}
         <div className="mt-8 sm:hidden">
-          <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-4 snap-x snap-mandatory scrollbar-none">
+          <div className="-mx-4 flex items-stretch gap-3 overflow-x-auto px-4 pb-4 snap-x snap-mandatory scrollbar-none">
             {items.map((t) => (
               <div
                 key={t.id}
-                className="flex min-w-[260px] shrink-0 snap-center flex-col rounded-xl border border-border bg-card p-4 shadow-sm"
+                className="flex min-w-[260px] max-w-[280px] shrink-0 snap-center flex-col justify-between rounded-xl border border-border bg-card p-4 shadow-sm"
               >
-                <Quote className="size-6 text-accent-foreground/30" />
-                <div className="mt-2 flex items-center gap-0.5 text-brand-orange">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star key={s} className={`size-3.5 ${s < t.rating ? "fill-current" : "text-border"}`} />
-                  ))}
+                <div>
+                  <Quote className="size-6 text-accent-foreground/30" />
+                  <div className="mt-2 flex items-center gap-0.5 text-brand-orange">
+                    {Array.from({ length: 5 }).map((_, s) => (
+                      <Star key={s} className={`size-3.5 ${s < t.rating ? "fill-current" : "text-border"}`} />
+                    ))}
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground">"{t.comment}"</p>
                 </div>
-                <p className="mt-2 flex-1 text-xs text-muted-foreground">"{t.comment}"</p>
-                <div className="mt-3 flex items-center gap-2">
+                <div className="mt-4 flex items-center gap-2 border-t border-border/50 pt-3">
                   <Avatar className="size-8">
                     <AvatarImage src={t.avatar} alt={t.name} />
                     <AvatarFallback className="text-xs">{t.name.charAt(0)}</AvatarFallback>
@@ -50,16 +52,18 @@ export function Testimonials() {
         {/* Desktop: grid layout */}
         <div className="mt-12 hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-3">
           {items.map((t, i) => (
-            <SectionReveal key={t.id} delay={(i % 3) * 0.05}>
-              <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-sm">
-                <Quote className="size-8 text-accent-foreground/30" />
-                <div className="mt-3 flex items-center gap-1 text-brand-orange">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star key={s} className={`size-4 ${s < t.rating ? "fill-current" : "text-border"}`} />
-                  ))}
+            <SectionReveal key={t.id} delay={(i % 3) * 0.05} className="h-full">
+              <div className="flex h-full flex-col justify-between rounded-2xl border border-border bg-card p-6 shadow-sm">
+                <div>
+                  <Quote className="size-8 text-accent-foreground/30" />
+                  <div className="mt-3 flex items-center gap-1 text-brand-orange">
+                    {Array.from({ length: 5 }).map((_, s) => (
+                      <Star key={s} className={`size-4 ${s < t.rating ? "fill-current" : "text-border"}`} />
+                    ))}
+                  </div>
+                  <p className="mt-3 text-sm text-muted-foreground">"{t.comment}"</p>
                 </div>
-                <p className="mt-3 flex-1 text-sm text-muted-foreground">"{t.comment}"</p>
-                <div className="mt-5 flex items-center gap-3">
+                <div className="mt-5 flex items-center gap-3 border-t border-border/50 pt-4">
                   <Avatar>
                     <AvatarImage src={t.avatar} alt={t.name} />
                     <AvatarFallback>{t.name.charAt(0)}</AvatarFallback>

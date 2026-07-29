@@ -373,12 +373,12 @@ export function SanyonaraProvider({ children }: { children: React.ReactNode }) {
       update: (key, val) =>
         setData((prev) => {
           const next = { ...prev, [key]: val };
-          saveCmsDataToCloud(next).catch(() => {});
+          saveCmsDataToCloud(next).catch(() => { });
           return next;
         }),
       resetData: () => {
         setData(seed);
-        saveCmsDataToCloud(seed).catch(() => {});
+        saveCmsDataToCloud(seed).catch(() => { });
       },
       waHref: (message) => waLink(data.contact.whatsapp, message),
     }),
