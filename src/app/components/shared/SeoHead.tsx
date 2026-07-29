@@ -24,8 +24,16 @@ export function SeoHead() {
     upsertMeta("property", "og:title", settings.metaTitle);
     upsertMeta("property", "og:description", settings.metaDescription);
     upsertMeta("property", "og:image", settings.ogImage);
-    upsertMeta("property", "og:url", "https://sanyonaraservice.web.id/");
+    upsertMeta("property", "og:url", "https://www.sanyonaraservice.web.id/");
     upsertMeta("property", "og:type", "website");
+
+    let canonicalEl = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonicalEl) {
+      canonicalEl = document.createElement("link");
+      canonicalEl.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalEl);
+    }
+    canonicalEl.setAttribute("href", "https://www.sanyonaraservice.web.id/");
 
     const rating = stats.find((s) => s.value.includes("/"))?.value.split("/")[0] ?? "4.9";
     const jsonLd = {

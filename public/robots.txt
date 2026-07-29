@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://sanyonaraservice.web.id/sitemap.xml
+Sitemap: https://www.sanyonaraservice.web.id/sitemap.xml
