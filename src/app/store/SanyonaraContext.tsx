@@ -19,6 +19,8 @@ export interface HeroData {
   secondaryCta: string;
   badges: string[];
   image: string;
+  floatingBadgeTitle?: string;
+  floatingBadgeSubtitle?: string;
 }
 
 export interface StatItem {
@@ -168,6 +170,8 @@ const seed: SanyonaraData = {
       "Respon Cepat < 15 Menit",
     ],
     image: IMAGES.heroTechnician,
+    floatingBadgeTitle: "Garansi 30 Hari",
+    floatingBadgeSubtitle: "Untuk setiap perbaikan",
   },
   stats: [
     { id: uid(), value: "1000+", label: "Pelanggan Puas" },

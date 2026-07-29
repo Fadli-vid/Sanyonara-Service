@@ -84,8 +84,8 @@ export function Hero() {
                   <CheckCircle2 className="size-6" />
                 </span>
                 <div>
-                  <p className="font-bold text-foreground">Garansi 30 Hari</p>
-                  <p className="text-sm text-muted-foreground">Untuk setiap perbaikan</p>
+                  <p className="font-bold text-foreground">{hero.floatingBadgeTitle || "Garansi 30 Hari"}</p>
+                  <p className="text-sm text-muted-foreground">{hero.floatingBadgeSubtitle || "Untuk setiap perbaikan"}</p>
                 </div>
               </div>
             </div>
