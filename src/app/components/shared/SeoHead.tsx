@@ -35,6 +35,15 @@ export function SeoHead() {
     }
     canonicalEl.setAttribute("href", "https://www.sanyonaraservice.web.id/");
 
+    let iconEl = document.head.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (!iconEl) {
+      iconEl = document.createElement("link");
+      iconEl.setAttribute("rel", "icon");
+      iconEl.setAttribute("type", "image/png");
+      document.head.appendChild(iconEl);
+    }
+    iconEl.setAttribute("href", "/library/logo.png");
+
     const rating = stats.find((s) => s.value.includes("/"))?.value.split("/")[0] ?? "4.9";
     const jsonLd = {
       "@context": "https://schema.org",
