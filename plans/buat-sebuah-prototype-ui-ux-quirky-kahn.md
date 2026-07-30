@@ -73,7 +73,7 @@ Satu file per section, dirangkai di `src/app/pages/LandingPage.tsx`. **Urutan be
 - `Footer.tsx` (logo, alamat, kontak, jam, mini-map/link maps, sosmed, copyright)
 
 ### Admin (`src/app/pages/admin/` + `src/app/components/admin/`)
-- `AdminLogin.tsx` (form email/password — mock, kredensial demo mis. admin@sanyonara.id / admin123, set flag login di context)
+- `AdminLogin.tsx` (form email/password — dikonfigurasi via variabel lingkungan rahasia VITE_ADMIN_EMAIL & VITE_ADMIN_PASSWORD, set flag login di context)
 - `AdminLayout.tsx` (sidebar kiri gaya Vercel via komponen `ui/sidebar`, header, `<Outlet/>`, guard redirect ke login)
 - `DashboardHome.tsx` (stat card jumlah layanan/foto/testimoni/faq + quick action: Edit Hero, Tambah Galeri, Tambah Harga)
 - Halaman CRUD: `HeroEditor.tsx`, `AboutEditor.tsx`, `ServicesManager.tsx`, `PricingManager.tsx`, `ServiceAreaEditor.tsx` (**baru** — edit teks cakupan & daftar wilayah), `GalleryManager.tsx`, `TestimonialsManager.tsx`, `FaqManager.tsx`, `ContactEditor.tsx`, `LocationEditor.tsx` (**baru** — alamat lengkap, jam operasional, link/embed Google Maps, link "Buka di Maps"; dengan **preview iframe langsung**), `SettingsEditor.tsx` (termasuk field **Local SEO**: Meta Title, Meta Description, keyword — mis. "Service AC Jakarta Selatan").
